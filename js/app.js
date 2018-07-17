@@ -53,10 +53,14 @@ function Calculadora(teclapresionada){
     resultado = resultado * -1;
   }else if (teclapresionada == "raiz"){
   //No hacer nada
-  }else if (teclapresionada == "dividido" || teclapresionada == "por" || teclapresionada == "menos" || teclapresionada == "mas" || teclapresionada == "igual"){
+  }else if (teclapresionada == "dividido" || teclapresionada == "por" || teclapresionada == "menos" || teclapresionada == "mas"){
     ejecutarOperacion();
     borrarResultado = true;
     operacion = teclapresionada;
+  }else if (teclapresionada == "igual"){
+    ejecutarOperacion();
+    operando1 = resultado
+    operacion = "";
   }else if (teclapresionada == "punto"){
     if (resultado.indexOf('.') == -1){
       resultado = resultado + '.';
@@ -90,7 +94,11 @@ function ejecutarOperacion(){
 }
 
 function mostrarResultado(){
+  var strResultado = resultado.toString();
   //Mostrar resultado
-  var objPantalla = document.getElementsByClassName("pantalla");
-  objPantalla[0].innerHTML = resultado;
+  if (strResultado.length>8){
+    resultado = strResultado.substring(0,8);
+  }
+  var objPantalla = document.getElementById("display");
+  objPantalla.innerHTML = resultado;
 }
